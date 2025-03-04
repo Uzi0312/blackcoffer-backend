@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, jsonify, request
 from sqlalchemy import text
 from app import db  # ✅ Import db from app.py
