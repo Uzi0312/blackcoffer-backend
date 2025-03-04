@@ -43,7 +43,7 @@ def check_and_add_columns():
             connection.commit()
 
 
-check_and_add_column()  # Run before defining DataPoint model
+check_and_add_columns()  # Run before defining DataPoint model
 
 # ✅ Import Blueprints (Routes)
 from flasksetup import bp as flasksetup_bp
