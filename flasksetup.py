@@ -5,19 +5,6 @@ from app import db  # ✅ Import db from app.py
 
 bp = Blueprint('flasksetup', __name__)  # ✅ Use a Blueprint
 
-def check_and_add_column():
-    with app.app_context():
-        inspector = inspect(db.engine)
-        columns = [col["name"] for col in inspector.get_columns("data_point")]
-
-        if "insight" not in columns:
-            with db.engine.connect() as connection:
-                connection.execute(text("ALTER TABLE data_point ADD COLUMN insight TEXT"))
-                connection.commit()
-            print("✅ 'insight' column added successfully!")
-
-check_and_add_column()  # Run before defining DataPoint model
-
 class DataPoint(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     end_year = db.Column(db.String(10))
