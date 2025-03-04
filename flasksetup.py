@@ -11,6 +11,20 @@ class DataPoint(db.Model):
     intensity = db.Column(db.Integer)
     sector = db.Column(db.String(255))
     topic = db.Column(db.String(255))
+    insight = db.Column(db.Text)  # ✅ Ensure this column exists
+    url = db.Column(db.String(500))
+    region = db.Column(db.String(255))
+    start_year = db.Column(db.String(10))
+    impact = db.Column(db.String(50))
+    added = db.Column(db.String(50))
+    published = db.Column(db.String(50))
+    country = db.Column(db.String(255))
+    relevance = db.Column(db.Integer)
+    pestle = db.Column(db.String(255))
+    source = db.Column(db.String(255))
+    title = db.Column(db.Text)
+    likelihood = db.Column(db.Integer)
+
 
 @bp.route('/data', methods=['GET'])
 def get_data():
