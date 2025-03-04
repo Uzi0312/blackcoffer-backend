@@ -14,16 +14,34 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-def check_and_add_column():
+def check_and_add_columns():
     with app.app_context():
         inspector = inspect(db.engine)
         columns = [col["name"] for col in inspector.get_columns("data_point")]
 
-        if "insight" not in columns:
-            with db.engine.connect() as connection:
-                connection.execute(text("ALTER TABLE data_point ADD COLUMN insight TEXT"))
-                connection.commit()
-            print("✅ 'insight' column added successfully!")
+        missing_columns = {
+            "insight": "TEXT",
+            "url": "VARCHAR(500)",
+            "region": "VARCHAR(255)",
+            "start_year": "VARCHAR(10)",
+            "impact": "VARCHAR(50)",
+            "added": "VARCHAR(50)",
+            "published": "VARCHAR(50)",
+            "country": "VARCHAR(255)",
+            "relevance": "INTEGER",
+            "pestle": "VARCHAR(255)",
+            "source": "VARCHAR(255)",
+            "title": "TEXT",
+            "likelihood": "INTEGER"
+        }
+
+        with db.engine.connect() as connection:
+            for column, datatype in missing_columns.items():
+                if column not in columns:
+                    connection.execute(text(f"ALTER TABLE data_point ADD COLUMN {column} {datatype}"))
+                    print(f"✅ Column '{column}' added successfully!")
+            connection.commit()
+
 
 check_and_add_column()  # Run before defining DataPoint model
 
