@@ -24,23 +24,40 @@ def get_data():
 
     return jsonify(result)
 
-@bp.route('/load_data', methods=['POST'])
+@app.route('/load_data', methods=['POST', 'GET'])
 def load_data():
     try:
         with open('jsondata.json', encoding='utf-8') as file:
             data = json.load(file)
 
+        print(f"📂 Loaded {len(data)} records from JSON")
+
         for item in data:
             record = DataPoint(
-                end_year=item.get("end_year", ""),
-                intensity=int(item["intensity"]) if item.get("intensity") not in [None, ""] else None,
+                end_year=item.get("end_year", None),  # Convert empty string to None
+                intensity=int(item["intensity"]) if str(item.get("intensity", "")).isdigit() else None,  # ✅ Check if value is a digit
                 sector=item.get("sector", ""),
-                topic=item.get("topic", "")
+                topic=item.get("topic", ""),
+                insight=item.get("insight", ""),
+                url=item.get("url", ""),
+                region=item.get("region", ""),
+                start_year=item.get("start_year", None),
+                impact=item.get("impact", ""),
+                added=item.get("added", ""),
+                published=item.get("published", ""),
+                country=item.get("country", ""),
+                relevance=int(item["relevance"]) if str(item.get("relevance", "")).isdigit() else None,
+                pestle=item.get("pestle", ""),
+                source=item.get("source", ""),
+                title=item.get("title", ""),
+                likelihood=int(item["likelihood"]) if str(item.get("likelihood", "")).isdigit() else None,
             )
             db.session.add(record)
 
         db.session.commit()
+        print("✅ Data committed successfully!")
         return jsonify({'message': 'Data loaded successfully'})
 
     except Exception as e:
+        print(f"❌ Error: {e}")
         return jsonify({'error': str(e)})
