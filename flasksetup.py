@@ -24,7 +24,7 @@ def get_data():
 
     return jsonify(result)
 
-@app.route('/load_data', methods=['POST', 'GET'])
+@bp.route('/load_data', methods=['POST', 'GET'])
 def load_data():
     try:
         with open('jsondata.json', encoding='utf-8') as file:
