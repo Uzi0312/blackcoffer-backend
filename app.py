@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)  # Allow Angular to access this API
 
 # Load database settings
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzair:reYXhN0QHMIzUDYEqi8CFDaW6sZnkUPL@dpg-cv3l6u8fnakc73fvp7vg-a/blackcofferdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzair:reYXhN0QHMIzUDYEqi8CFDaW6sZnkUPL@dpg-cv3l6u8fnakc73fvp7vg-a.oregon-postgres.render.com/blackcofferdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
