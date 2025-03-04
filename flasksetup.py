@@ -10,7 +10,7 @@ bp = Blueprint('flasksetup', __name__)  # Use a Blueprint
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:uzair123@localhost/blackcoffer'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uzair:reYXhN0QHMIzUDYEqi8CFDaW6sZnkUPL@dpg-cv3l6u8fnakc73fvp7vg-a/blackcofferdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
