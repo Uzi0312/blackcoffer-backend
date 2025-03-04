@@ -48,23 +48,23 @@ def load_data():
 
         for item in data:
             record = DataPoint(
-                end_year=item.get("end_year", None),  # Convert empty string to None
-                intensity=int(item["intensity"]) if str(item.get("intensity", "")).isdigit() else None,  # ✅ Check if value is a digit
-                sector=item.get("sector", ""),
-                topic=item.get("topic", ""),
-                insight=item.get("insight", ""),
-                url=item.get("url", ""),
-                region=item.get("region", ""),
-                start_year=item.get("start_year", None),
-                impact=item.get("impact", ""),
-                added=item.get("added", ""),
-                published=item.get("published", ""),
-                country=item.get("country", ""),
-                relevance=int(item["relevance"]) if str(item.get("relevance", "")).isdigit() else None,
-                pestle=item.get("pestle", ""),
-                source=item.get("source", ""),
-                title=item.get("title", ""),
-                likelihood=int(item["likelihood"]) if str(item.get("likelihood", "")).isdigit() else None,
+                end_year=item.get("end_year") or None,  # Convert empty to None
+                intensity=int(item["intensity"]) if str(item.get("intensity", "0")).isdigit() else None,
+                sector=item.get("sector") or None,
+                topic=item.get("topic") or None,
+                insight=item.get("insight") or None,
+                url=item.get("url") or None,
+                region=item.get("region") or None,
+                start_year=item.get("start_year") or None,
+                impact=item.get("impact") or None,
+                added=item.get("added") or None,
+                published=item.get("published") or None,
+                country=item.get("country") or None,
+                relevance=int(item["relevance"]) if str(item.get("relevance", "0")).isdigit() else None,
+                pestle=item.get("pestle") or None,
+                source=item.get("source") or None,
+                title=item.get("title") or None,
+                likelihood=int(item["likelihood"]) if str(item.get("likelihood", "0")).isdigit() else None,
             )
             db.session.add(record)
 
