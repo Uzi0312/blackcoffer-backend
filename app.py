@@ -20,6 +20,10 @@ import auth
 app.register_blueprint(flasksetup.bp)
 app.register_blueprint(auth.bp)
 
+@app.route('/')
+def home():
+    return "✅ Flask API is running!"
+
 # Start the Flask app
 if __name__ == '__main__':
     app.run(debug=True)
