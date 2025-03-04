@@ -1,0 +1,7 @@
+Flask
+Flask-CORS
+Flask-Session
+Flask-SQLAlchemy
+pymysql
+gunicorn
+requests
