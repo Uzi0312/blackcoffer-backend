@@ -5,3 +5,4 @@ Flask-SQLAlchemy
 pymysql
 gunicorn
 requests
+psycopg2-binary
