@@ -13,6 +13,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+def check_and_add_column():
+    with app.app_context():
+        inspector = inspect(db.engine)
+        columns = [col["name"] for col in inspector.get_columns("data_point")]
+
+        if "insight" not in columns:
+            with db.engine.connect() as connection:
+                connection.execute(text("ALTER TABLE data_point ADD COLUMN insight TEXT"))
+                connection.commit()
+            print("✅ 'insight' column added successfully!")
+
+check_and_add_column()  # Run before defining DataPoint model
+
 # ✅ Import Blueprints (Routes)
 from flasksetup import bp as flasksetup_bp
 from auth import bp as auth_bp
