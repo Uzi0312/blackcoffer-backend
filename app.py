@@ -26,6 +26,10 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 def home():
     return "✅ Flask API is running!"
 
+# ✅ Create tables if they don't exist
+with app.app_context():
+    db.create_all()  # ✅ Auto-create missing tables
+
 # ✅ Run Flask (Only in Development)
 if __name__ == '__main__':
     app.run(debug=True)
